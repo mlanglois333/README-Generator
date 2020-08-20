@@ -49,46 +49,40 @@ function promptUser() {
     ]);
 }
 
-function generateHTML(answers) {
+function generateMD(answers) {
     return `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>ReadMe</title>
-</head>
-<body>
-    <h1>${answers.title}</h1>
-    <br>
-    <h3>Description</h3>
-    <br>
-    <p> ${answers.description}.</p>
-    <br>
-    <h3>Table of Contents</h3>
-    <br>
-    <p> ${answers.table}.</p>
-    <br>
-    <h3>Usage</h3>
-    <br>
-    <p> ${answers.usage}.</p>
-    <br>
-    <h3>License</h3>
-    <br>
-    <p> ${answers.license}.</p>
-    <br>
-    <h3>Contributors</h3>
-    <br>
-    <p> ${answers.contributors}.</p>
-    <br
-    ><h3>Tests</h3>
-    <br>
-    <p> ${answers.tests}.</p>
-    <br>
-    <h3>Questions</h3>
-    <br>
-    <p> ${answers.questions}.</p>
-    <br>
-</body>
-</html>`;
+
+    # ${answers.title}
+    
+    ### Description
+    
+     ${answers.description}
+    
+    ### Table of Contents
+    
+    ${answers.table}
+    
+    ### Usage
+    
+    ${answers.usage}
+    
+    ### License
+    
+    ${answers.license}
+    
+    ### Contributors
+    
+    ${answers.contributors}
+    
+    ### Tests
+    
+    ${answers.tests}
+    
+    ### Questions
+    
+    ${answers.questions}
+    
+`;
 }
 
 async function init() {
@@ -96,9 +90,9 @@ async function init() {
     try {
         const answers = await promptUser();
 
-        const html = generateHTML(answers);
+        const MD = generateMD(answers);
 
-        await writeFileAsync("README.md", html);
+        await writeFileAsync("README.md", MD);
 
         console.log("Written");
     } catch (err) {
