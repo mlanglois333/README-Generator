@@ -1,8 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
-
+const MarkdownIt = require("markdown-it"), md=new MarkdownIt();
 const writeFileAsync = util.promisify(fs.writeFile);
+
 
 function promptUser() {
     return inquirer.prompt([
@@ -50,39 +51,34 @@ function promptUser() {
 }
 
 function generateMD(answers) {
-    return `
 
+    
+  return md.render(`
+  
     # ${answers.title}
     
-    ### Description
+    ## Description
+    ${answers.description}
     
-     ${answers.description}
-    
-    ### Table of Contents
-    
+    ## Table of Contents
     ${answers.table}
     
-    ### Usage
-    
+    ## Usage
     ${answers.usage}
     
-    ### License
-    
+    ## License
     ${answers.license}
     
-    ### Contributors
-    
+    ## Contributors
     ${answers.contributors}
     
-    ### Tests
-    
+    ## Tests
     ${answers.tests}
     
     ### Questions
-    
     ${answers.questions}
     
-`;
+`)
 }
 
 async function init() {
@@ -90,9 +86,9 @@ async function init() {
     try {
         const answers = await promptUser();
 
-        const MD = generateMD(answers);
+        const MDcomplete = generateMD(answers);
 
-        await writeFileAsync("README.md", MD);
+        await writeFileAsync("README.md", MDcomplete);
 
         console.log("Written");
     } catch (err) {
