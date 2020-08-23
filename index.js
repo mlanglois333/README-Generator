@@ -53,32 +53,26 @@ function promptUser() {
 function generateMD(answers) {
 
     
-  return md.render(`
-  
-    # ${answers.title}
+  return md.render(`# ${answers.title}
+                    ## Description
+                    ${answers.description}
+                     ## Table of Contents
+                    ${answers.table}
     
-    ## Description
-    ${answers.description}
+                    ## Usage
+                    ${answers.usage}
     
-    ## Table of Contents
-    ${answers.table}
+                    ## License
+                    ${answers.license}
     
-    ## Usage
-    ${answers.usage}
+                    ## Contributors
+                    ${answers.contributors}
     
-    ## License
-    ${answers.license}
+                     ## Tests
+                    ${answers.tests}
     
-    ## Contributors
-    ${answers.contributors}
-    
-    ## Tests
-    ${answers.tests}
-    
-    ### Questions
-    ${answers.questions}
-    
-`)
+                    ### Questions
+                    ${answers.questions}`)
 }
 
 async function init() {
